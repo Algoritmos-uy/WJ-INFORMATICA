@@ -1,0 +1,176 @@
+/* ─── HERO ───────────────────────────────────────────────────── */
+.hero {
+  position: relative;
+  background:
+    linear-gradient(rgba(15, 20, 50, 0.65), rgba(10, 18, 45, 0.75)),
+    url('../../assets/images/ini-back-cl.png') center / cover no-repeat;
+  padding-block: clamp(var(--s16), 12vw, var(--s24));
+  overflow: hidden;
+}
+
+[data-theme="dark"] .hero {
+  background:
+    linear-gradient(rgba(0, 0, 0, 0.62), rgba(0, 5, 20, 0.72)),
+    url('../../assets/images/ini-back-dark.png') center / cover no-repeat;
+}
+
+/* Patrón decorativo de puntos */
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(circle, rgba(255,255,255,.08) 1px, transparent 1px);
+  background-size: 28px 28px;
+  pointer-events: none;
+}
+
+.hero__inner {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--s12);
+  align-items: center;
+}
+
+/* Texto del hero */
+.hero__label {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.75);
+  background: rgba(255,255,255,.12);
+  padding: var(--s1) var(--s3);
+  border-radius: var(--r-full);
+  margin-bottom: var(--s4);
+}
+
+.hero__title {
+  color: var(--c-hero-text);
+  margin-bottom: var(--s5);
+}
+
+.hero__accent {
+  background: linear-gradient(90deg, #fff 0%, rgba(255,255,255,.7) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.hero__desc {
+  color: rgba(255,255,255,.8);
+  font-size: 1.0625rem;
+  max-width: 46ch;
+  margin-bottom: var(--s8);
+}
+
+.hero__actions {
+  display: flex;
+  gap: var(--s3);
+  flex-wrap: wrap;
+}
+
+.hero__btn-contact {
+  border-color: rgba(255,255,255,.6);
+  color: #fff;
+}
+.hero__btn-contact:hover {
+  background: rgba(255,255,255,.15);
+  border-color: #fff;
+  color: #fff;
+}
+
+/* Ventana de código decorativa */
+.hero__visual { display: flex; justify-content: flex-end; }
+
+.code-window {
+  background: rgba(0,0,0,.35);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255,255,255,.15);
+  border-radius: var(--r-xl);
+  overflow: hidden;
+  width: 100%;
+  max-width: 380px;
+  font-family: var(--ff-mono);
+  font-size: 0.875rem;
+}
+
+.code-window__bar {
+  background: rgba(0,0,0,.2);
+  padding: var(--s3) var(--s4);
+  display: flex;
+  gap: var(--s2);
+  border-bottom: 1px solid rgba(255,255,255,.08);
+}
+
+.code-window__dot {
+  width: 12px;
+  height: 12px;
+  border-radius: var(--r-full);
+  background: rgba(255,255,255,.25);
+}
+.code-window__dot:nth-child(1) { background: #ff5f57; }
+.code-window__dot:nth-child(2) { background: #febc2e; }
+.code-window__dot:nth-child(3) { background: #28c840; }
+
+.code-window__content {
+  padding: var(--s6);
+  line-height: 1.9;
+}
+
+.code-kw   { color: #7dd3fc; }
+.code-var  { color: #fde68a; }
+.code-prop { color: #a5f3fc; }
+.code-str  { color: #86efac; }
+.code-bool { color: #f9a8d4; }
+.code-num  { color: #fdba74; }
+
+/* ─── SERVICIOS DESTACADOS (inicio) ─────────────────────────── */
+.services-preview { background: var(--c-surface); }
+
+/* ─── PORTFOLIO PREVIEW (inicio) ─────────────────────────────── */
+
+/* ─── STATS BAR ──────────────────────────────────────────────── */
+.stats {
+  background: var(--c-surface-2);
+  border-top: 1px solid var(--c-border);
+  border-bottom: 1px solid var(--c-border);
+  padding-block: var(--s10);
+}
+
+.stats__list {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  gap: var(--s8);
+  text-align: center;
+}
+
+.stats__item { min-width: 120px; }
+
+.stats__num {
+  display: block;
+  font-size: clamp(1.75rem, 3vw, 2.5rem);
+  font-weight: 800;
+  background: linear-gradient(135deg, var(--c-primary), var(--c-accent));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  line-height: 1.1;
+  margin-bottom: var(--s2);
+}
+
+.stats__label {
+  font-size: 0.875rem;
+  color: var(--c-text-3);
+  font-weight: 500;
+}
+
+/* ─── RESPONSIVE ─────────────────────────────────────────────── */
+@media (max-width: 900px) {
+  .hero__inner { grid-template-columns: 1fr; }
+  .hero__visual { display: none; }
+  .hero__desc { max-width: none; }
+}

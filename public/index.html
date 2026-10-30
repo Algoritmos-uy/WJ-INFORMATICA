@@ -1,0 +1,355 @@
+<!doctype html>
+<html lang="es" data-theme="light">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WJ-INFORMATICA — Soluciones tecnológicas profesionales</title>
+  <meta name="description"
+    content="Diseño web, desarrollo de software, hosting, automatizaciones e inteligencia artificial para empresas y profesionales.">
+  <link rel="canonical" href="https://algoritmos.uy/">
+  <meta property="og:title" content="WJ-INFORMATICA — Soluciones tecnológicas profesionales">
+  <meta property="og:description"
+    content="Diseño web, desarrollo de software, hosting, automatizaciones e IA para empresas y profesionales.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://algoritmos.uy/">
+  <link rel="stylesheet" href="css/theme.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/pages/inicio.css">
+  <script>
+    (function () { try { var s = localStorage.getItem('wj-theme'), d = window.matchMedia('(prefers-color-scheme: dark)').matches; document.documentElement.dataset.theme = s || (d ? 'dark' : 'light'); } catch (e) { } })();
+  </script>
+</head>
+
+<body>
+  <a href="#main" class="skip-link">Saltar al contenido principal</a>
+
+  <!-- HEADER -->
+  <header class="header" role="banner">
+    <div class="container header__inner">
+      <a href="index.html" class="brand" aria-label="WJ-INFORMATICA — Inicio">
+        <svg class="brand__mark" width="36" height="36" viewBox="0 0 36 36" fill="none" aria-hidden="true">
+          <rect width="36" height="36" rx="8" fill="var(--c-primary)" />
+          <text x="18" y="25" font-size="14" font-weight="800" text-anchor="middle" fill="white"
+            font-family="system-ui,sans-serif" letter-spacing="-0.5">WJ</text>
+        </svg>
+        <span class="brand__name">WJ-INFORMATICA</span>
+      </a>
+
+      <nav class="nav" id="mainNav" aria-label="Navegación principal">
+        <ul class="nav__list" role="list">
+          <li><a href="index.html" class="nav__link" aria-current="page">Inicio</a></li>
+          <li><a href="soluciones.html" class="nav__link">Soluciones</a></li>
+          <li><a href="portfolio.html" class="nav__link">Portfolio</a></li>
+          <li><a href="sobre-mi.html" class="nav__link">Sobre mí</a></li>
+          <li><a href="contacto.html" class="nav__link nav__link--cta">Contactar</a></li>
+        </ul>
+      </nav>
+
+      <div class="header__actions">
+        <button class="theme-toggle" type="button" id="themeToggle" aria-label="Cambiar a tema oscuro">
+          <svg class="theme-toggle__sun" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="12" cy="12" r="5" />
+            <line x1="12" y1="1" x2="12" y2="3" />
+            <line x1="12" y1="21" x2="12" y2="23" />
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" />
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" />
+            <line x1="1" y1="12" x2="3" y2="12" />
+            <line x1="21" y1="12" x2="23" y2="12" />
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" />
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
+          </svg>
+          <svg class="theme-toggle__moon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+          </svg>
+        </button>
+        <button class="nav-toggle" type="button" id="navToggle" aria-label="Abrir menú" aria-expanded="false"
+          aria-controls="mainNav">
+          <span class="nav-toggle__bar"></span>
+          <span class="nav-toggle__bar"></span>
+          <span class="nav-toggle__bar"></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+
+    <!-- HERO -->
+    <section class="hero" aria-label="Presentación principal">
+      <div class="container hero__inner">
+        <div class="hero__text">
+          <span class="hero__label">Soluciones tecnológicas profesionales</span>
+          <h1 class="hero__title">Transformamos<br><span class="hero__accent">ideas</span> en software<br>que funciona
+          </h1>
+          <p class="hero__desc">Diseño web, desarrollo de software, hosting, automatizaciones e inteligencia artificial
+            para empresas y profesionales.</p>
+          <div class="hero__actions">
+            <a href="soluciones.html" class="btn btn--primary btn--lg">Ver soluciones</a>
+            <a href="contacto.html" class="btn btn--lg hero__btn-contact">Contactar</a>
+          </div>
+        </div>
+        <div class="hero__visual" aria-hidden="true">
+          <div class="code-window">
+            <div class="code-window__bar">
+              <span class="code-window__dot"></span>
+              <span class="code-window__dot"></span>
+              <span class="code-window__dot"></span>
+            </div>
+            <div class="code-window__content">
+              <code>
+                <span class="code-kw">const</span> <span class="code-var">proyecto</span> = {<br>
+                &nbsp;&nbsp;<span class="code-prop">web</span>: <span class="code-str">'profesional'</span>,<br>
+                &nbsp;&nbsp;<span class="code-prop">backend</span>: <span class="code-str">'node.js'</span>,<br>
+                &nbsp;&nbsp;<span class="code-prop">ia</span>: <span class="code-str">'integrada'</span>,<br>
+                &nbsp;&nbsp;<span class="code-prop">hosting</span>: <span class="code-str">'seguro'</span>,<br>
+                &nbsp;&nbsp;<span class="code-prop">calidad</span>: <span class="code-bool">true</span><br>
+                };<br><br>
+                <span class="code-kw">await</span> <span class="code-var">proyecto</span>.<span class="code-prop">lanzar</span>();<br>
+                <span class="code-str">// ✓ Listo para producción</span>
+              </code>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ÁREAS DE SERVICIO -->
+    <section class="section services-preview" aria-labelledby="services-heading">
+      <div class="container">
+        <div class="section__header">
+          <span class="section__label">Qué ofrezco</span>
+          <h2 class="section__title" id="services-heading">Soluciones para cada necesidad</h2>
+          <p class="section__desc">Desde el diseño de la presencia digital hasta la automatización inteligente de
+            procesos.</p>
+        </div>
+        <div class="grid-3">
+
+          <article class="card card--service">
+            <div class="card__icon card__icon--web" aria-hidden="true">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10" />
+                <line x1="2" y1="12" x2="22" y2="12" />
+                <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
+              </svg>
+            </div>
+            <h3 class="card__title">Diseño y Desarrollo Web</h3>
+            <p class="card__desc">Sitios y aplicaciones web profesionales, rápidos, seguros y adaptados a cualquier
+              dispositivo.</p>
+            <a href="soluciones.html" class="card__cta">Ver más →</a>
+          </article>
+
+          <article class="card card--service">
+            <div class="card__icon card__icon--code" aria-hidden="true">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="16 18 22 12 16 6" />
+                <polyline points="8 6 2 12 8 18" />
+              </svg>
+            </div>
+            <h3 class="card__title">Desarrollo de Software</h3>
+            <p class="card__desc">Aplicaciones a medida que resuelven los procesos concretos de tu negocio con
+              eficiencia y escalabilidad.</p>
+            <a href="soluciones.html" class="card__cta">Ver más →</a>
+          </article>
+
+          <article class="card card--service">
+            <div class="card__icon card__icon--ai" aria-hidden="true">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="11" width="18" height="10" rx="2" />
+                <circle cx="12" cy="5" r="2" />
+                <line x1="12" y1="7" x2="12" y2="11" />
+                <circle cx="8" cy="16" r="1" fill="currentColor" stroke="none" />
+                <circle cx="16" cy="16" r="1" fill="currentColor" stroke="none" />
+              </svg>
+            </div>
+            <h3 class="card__title">Automatizaciones con IA</h3>
+            <p class="card__desc">Automatiza tareas repetitivas e integra asistentes de inteligencia artificial que
+              trabajan por tu negocio.</p>
+            <a href="soluciones.html" class="card__cta">Ver más →</a>
+          </article>
+
+          <article class="card card--service">
+            <div class="card__icon card__icon--host" aria-hidden="true">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <rect x="2" y="2" width="20" height="8" rx="2" />
+                <rect x="2" y="14" width="20" height="8" rx="2" />
+                <circle cx="6.5" cy="6" r="1" fill="currentColor" stroke="none" />
+                <circle cx="6.5" cy="18" r="1" fill="currentColor" stroke="none" />
+              </svg>
+            </div>
+            <h3 class="card__title">Hosting y Servicios</h3>
+            <p class="card__desc">Alojamiento web confiable, correo profesional y gestión de dominios para tu presencia
+              en línea.</p>
+            <a href="soluciones.html" class="card__cta">Ver más →</a>
+          </article>
+
+          <article class="card card--service">
+            <div class="card__icon card__icon--app" aria-hidden="true">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="3" width="7" height="7" />
+                <rect x="14" y="3" width="7" height="7" />
+                <rect x="14" y="14" width="7" height="7" />
+                <rect x="3" y="14" width="7" height="7" />
+              </svg>
+            </div>
+            <h3 class="card__title">Sistemas Administrativos</h3>
+            <p class="card__desc">Paneles de gestión, dashboards y aplicaciones internas que optimizan la operación
+              diaria de tu empresa.</p>
+            <a href="soluciones.html" class="card__cta">Ver más →</a>
+          </article>
+
+          <article class="card card--service">
+            <div class="card__icon card__icon--hw-d" aria-hidden="true">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <rect x="2" y="3" width="20" height="14" rx="2" />
+                <line x1="8" y1="21" x2="16" y2="21" />
+                <line x1="12" y1="17" x2="12" y2="21" />
+              </svg>
+            </div>
+            <h3 class="card__title">Equipos de Escritorio y Laptops</h3>
+            <p class="card__desc">Asesoramiento y comercialización de equipos informáticos adaptados a tus necesidades y
+              presupuesto.</p>
+            <a href="soluciones.html" class="card__cta">Ver más →</a>
+          </article>
+
+        </div>
+        <div style="text-align:center; margin-top: var(--s10);">
+          <a href="soluciones.html" class="btn btn--outline">Ver todos los servicios</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- PORTFOLIO PREVIEW -->
+    <section class="section" aria-labelledby="portfolio-heading">
+      <div class="container">
+        <div class="section__header">
+          <span class="section__label">Trabajos realizados</span>
+          <h2 class="section__title" id="portfolio-heading">Portfolio de proyectos</h2>
+          <p class="section__desc">Soluciones desarrolladas con tecnología moderna y enfoque en los resultados del
+            cliente.</p>
+        </div>
+        <div class="grid-3">
+          <!-- PLACEHOLDER: Los proyectos reales se incorporarán cuando estén disponibles -->
+          <article class="card card--portfolio">
+            <div class="card__thumb">
+              <div class="card__thumb-bg card__thumb-bg--1"></div>
+            </div>
+            <div class="card__body">
+              <span class="card__status card__status--demo">Demo</span>
+              <h3 class="card__title">Sistema de Gestión</h3>
+              <p class="card__desc">Panel administrativo con autenticación, reportes y gestión de registros.</p>
+              <div class="card__tags"><span class="tag">Node.js</span><span class="tag">SQLite</span><span
+                  class="tag">HTML/CSS</span></div>
+            </div>
+          </article>
+          <article class="card card--portfolio">
+            <div class="card__thumb">
+              <div class="card__thumb-bg card__thumb-bg--2"></div>
+            </div>
+            <div class="card__body">
+              <span class="card__status card__status--demo">Demo</span>
+              <h3 class="card__title">Sitio Corporativo</h3>
+              <p class="card__desc">Web profesional con formulario de contacto, portfolio y blog integrado.</p>
+              <div class="card__tags"><span class="tag">HTML5</span><span class="tag">CSS3</span><span
+                  class="tag">JavaScript</span></div>
+            </div>
+          </article>
+          <article class="card card--portfolio">
+            <div class="card__thumb">
+              <div class="card__thumb-bg card__thumb-bg--3"></div>
+            </div>
+            <div class="card__body">
+              <span class="card__status card__status--dev">En desarrollo</span>
+              <h3 class="card__title">Asistente con IA</h3>
+              <p class="card__desc">Chatbot integrado con documentación interna para responder consultas de clientes.
+              </p>
+              <div class="card__tags"><span class="tag">Node.js</span><span class="tag">DeepSeek</span><span
+                  class="tag">RAG</span></div>
+            </div>
+          </article>
+        </div>
+        <div style="text-align:center; margin-top: var(--s10);">
+          <a href="portfolio.html" class="btn btn--outline">Ver portfolio completo</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA FINAL -->
+    <section class="cta-strip" aria-labelledby="cta-heading">
+      <div class="container">
+        <h2 class="cta-strip__title" id="cta-heading">¿Tenés un proyecto en mente?</h2>
+        <p class="cta-strip__desc">Contame qué necesitás. Analizamos tu caso sin compromiso y te proponemos la solución
+          más adecuada.</p>
+        <a href="contacto.html" class="btn btn--outline btn--lg">Iniciar conversación</a>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer" role="contentinfo">
+    <div class="container">
+      <div class="footer__inner">
+        <div class="footer__brand">
+          <a href="index.html" class="brand" aria-label="WJ-INFORMATICA — Inicio">
+            <svg class="brand__mark" width="36" height="36" viewBox="0 0 36 36" fill="none" aria-hidden="true">
+              <rect width="36" height="36" rx="8" fill="var(--c-primary)" />
+              <text x="18" y="25" font-size="14" font-weight="800" text-anchor="middle" fill="white"
+                font-family="system-ui,sans-serif" letter-spacing="-0.5">WJ</text>
+            </svg>
+            <span class="brand__name">WJ-INFORMATICA</span>
+          </a>
+          <p class="footer__tagline">Soluciones tecnológicas profesionales para empresas y particulares.</p>
+        </div>
+        <nav aria-label="Secciones del sitio">
+          <h3 class="footer__nav-title">Secciones</h3>
+          <ul class="footer__links" role="list">
+            <li><a href="index.html">Inicio</a></li>
+            <li><a href="soluciones.html">Soluciones</a></li>
+            <li><a href="portfolio.html">Portfolio</a></li>
+            <li><a href="sobre-mi.html">Sobre mí</a></li>
+            <li><a href="contacto.html">Contacto</a></li>
+          </ul>
+        </nav>
+        <div>
+          <h3 class="footer__nav-title">Contacto</h3>
+          <ul class="footer__links" role="list">
+            <!-- PLACEHOLDER: Reemplazar con datos reales antes de publicar -->
+            <li><a href="mailto:wjdev@algoritmos.uy">wjdev@algoritmos.uy</a></li>
+            <li><a href="https://wa.me/598091941935" target="_blank" rel="noopener noreferrer">WhatsApp</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        <p>© <span id="currentYear"></span> WJ-INFORMATICA. Todos los derechos reservados.</p>
+        <a href="admin/" class="footer__admin-link">Administración</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Botón flotante WhatsApp -->
+  <!-- PLACEHOLDER: Reemplazar XXXXXXXXXX con el número real (código país + número, sin +) -->
+  <a href="https://wa.me/598091941935?text=Hola%2C%20me%20interesa%20conocer%20m%C3%A1s%20sobre%20sus%20servicios."
+    class="wa-float" target="_blank" rel="noopener noreferrer" aria-label="Contactar por WhatsApp">
+    <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <path
+        d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z" />
+    </svg>
+  </a>
+
+  <script>document.getElementById('currentYear').textContent = new Date().getFullYear();</script>
+  <script type="module" src="js/theme.js"></script>
+  <script type="module" src="js/nav.js"></script>
+</body>
+
+</html>

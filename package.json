@@ -1,0 +1,16 @@
+{
+  "name": "wj-informatica",
+  "version": "1.0.0",
+  "description": "WJ-INFORMATICA — Soluciones tecnológicas profesionales",
+  "type": "module",
+  "engines": {
+    "node": ">=24.0.0"
+  },
+  "scripts": {
+    "start": "node backend/server.js",
+    "dev": "node --watch backend/server.js",
+    "hash-password": "node backend/scripts/hash-password.js"
+  },
+  "license": "UNLICENSED",
+  "private": true
+}

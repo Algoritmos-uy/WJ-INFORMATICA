@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+
+# Rutas privadas — no indexar
+Disallow: /admin/
+
+Sitemap: https://algoritmos.uy/sitemap.xml

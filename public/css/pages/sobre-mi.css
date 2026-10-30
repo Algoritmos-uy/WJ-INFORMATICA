@@ -1,0 +1,109 @@
+/* ─── SOBRE MÍ ───────────────────────────────────────────────── */
+.about-layout {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: var(--s12);
+  align-items: start;
+}
+
+.about-aside {
+  position: sticky;
+  top: calc(var(--header-h) + var(--s6));
+}
+
+.about-avatar {
+  width: 100%;
+  aspect-ratio: 1;
+  max-width: 280px;
+  border-radius: var(--r-xl);
+  background: linear-gradient(135deg, var(--c-primary), var(--c-accent));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: var(--s5);
+  overflow: hidden;
+}
+
+.about-avatar__placeholder {
+  font-size: 5rem;
+  font-weight: 800;
+  color: rgba(255,255,255,.9);
+  font-family: var(--ff);
+}
+
+.about-info { display: flex; flex-direction: column; gap: var(--s3); }
+
+.about-info__item {
+  display: flex;
+  align-items: center;
+  gap: var(--s3);
+  font-size: 0.9375rem;
+  color: var(--c-text-2);
+}
+
+.about-info__icon { color: var(--c-primary); flex-shrink: 0; }
+
+/* Áreas de especialización */
+.skills-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s3);
+  margin-top: var(--s4);
+}
+
+.skill-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s2);
+  padding: var(--s2) var(--s4);
+  background: var(--c-surface-3);
+  border: 1px solid var(--c-border);
+  border-radius: var(--r-full);
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--c-text-2);
+}
+
+.skill-badge::before {
+  content: '';
+  width: 8px;
+  height: 8px;
+  border-radius: var(--r-full);
+  background: linear-gradient(135deg, var(--c-primary), var(--c-accent));
+  flex-shrink: 0;
+}
+
+/* Valores de trabajo */
+.values-list { display: flex; flex-direction: column; gap: var(--s5); }
+
+.value-item {
+  display: flex;
+  gap: var(--s4);
+  align-items: flex-start;
+}
+
+.value-item__icon {
+  width: 40px;
+  height: 40px;
+  border-radius: var(--r-lg);
+  background: linear-gradient(135deg, var(--c-primary), var(--c-accent));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.value-item__title {
+  font-size: 1rem;
+  font-weight: 700;
+  margin-bottom: var(--s2);
+  color: var(--c-text);
+}
+
+@media (max-width: 900px) {
+  .about-layout { grid-template-columns: 1fr; }
+  .about-aside { position: static; }
+  .about-avatar { max-width: 200px; }
+}

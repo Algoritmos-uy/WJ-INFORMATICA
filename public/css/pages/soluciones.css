@@ -1,0 +1,36 @@
+/* ─── CABECERA DE PÁGINA ─────────────────────────────────────── */
+.page-hero {
+  background: linear-gradient(135deg, var(--c-hero-from) 0%, var(--c-hero-to) 100%);
+  padding-block: var(--s16);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.page-hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(circle, rgba(255,255,255,.07) 1px, transparent 1px);
+  background-size: 24px 24px;
+  pointer-events: none;
+}
+.page-hero__inner { position: relative; z-index: 1; }
+.page-hero__title { color: #fff; margin-bottom: var(--s4); }
+.page-hero__desc  { color: rgba(255,255,255,.8); max-width: 56ch; margin-inline: auto; }
+
+/* ─── CATÁLOGO ───────────────────────────────────────────────── */
+.solutions-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 280px), 1fr));
+  gap: var(--s6);
+}
+
+/* Card icon variants */
+.card__icon--web    { background: linear-gradient(135deg, #1d4ed8, #0891b2); }
+.card__icon--code   { background: linear-gradient(135deg, #7c3aed, #4f46e5); }
+.card__icon--app    { background: linear-gradient(135deg, #0891b2, #059669); }
+.card__icon--host   { background: linear-gradient(135deg, #0369a1, #0284c7); }
+.card__icon--auto   { background: linear-gradient(135deg, #6d28d9, #ec4899); }
+.card__icon--ai     { background: linear-gradient(135deg, #7c2d12, #c2410c); }
+.card__icon--hw-d   { background: linear-gradient(135deg, #374151, #6b7280); }
+.card__icon--hw-l   { background: linear-gradient(135deg, #1f2937, #374151); }
