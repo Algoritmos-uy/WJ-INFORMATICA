@@ -21,6 +21,7 @@ const MIME = {
 };
 
 const PUBLIC = resolve(process.cwd(), 'public');
+const ADMIN  = resolve(process.cwd(), 'admin');
 
 const SEC_HEADERS = {
   'X-Content-Type-Options': 'nosniff',
@@ -57,6 +58,41 @@ export function serveStatic(req, res, url) {
   const type = MIME[ext] ?? 'application/octet-stream';
 
   res.writeHead(200, { ...SEC_HEADERS, 'Content-Type': type, 'Content-Length': stat.size });
+  createReadStream(filePath).pipe(res);
+}
+
+export function serveAdmin(req, res, url) {
+  let pathname = decodeURIComponent(url.pathname).replace(/^\/admin/, '') || '/';
+  if (pathname === '/' || pathname === '') pathname = '/index.html';
+  if (!extname(pathname)) pathname += '.html';
+
+  const filePath = resolve(ADMIN, '.' + pathname);
+  if (!filePath.startsWith(ADMIN + '\\') && filePath !== ADMIN) {
+    res.writeHead(403, SEC_HEADERS); res.end(); return;
+  }
+
+  let stat;
+  try { stat = statSync(filePath); } catch (_) {
+    // No hay 404.html específica del admin — redirigir a index
+    const idx = resolve(ADMIN, 'index.html');
+    try {
+      const s = statSync(idx);
+      const csp = "default-src 'self'; style-src 'self'; script-src 'self'; img-src 'self' data:;";
+      res.writeHead(200, { ...SEC_HEADERS, 'Content-Security-Policy': csp, 'Content-Type': 'text/html; charset=utf-8', 'Content-Length': s.size });
+      createReadStream(idx).pipe(res);
+    } catch { serve404(res); }
+    return;
+  }
+
+  if (!stat.isFile()) { serve404(res); return; }
+
+  const ext  = extname(filePath).toLowerCase();
+  const type = MIME[ext] ?? 'application/octet-stream';
+  const headers = { ...SEC_HEADERS, 'Content-Type': type, 'Content-Length': stat.size };
+  if (ext === '.html') {
+    headers['Content-Security-Policy'] = "default-src 'self'; style-src 'self'; script-src 'self'; img-src 'self' data:;";
+  }
+  res.writeHead(200, headers);
   createReadStream(filePath).pipe(res);
 }
 

@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Administración — WJ-INFORMATICA</title>
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="stylesheet" href="css/admin.css">
+</head>
+<body>
+
+  <!-- ── Cargando ── -->
+  <div id="view-loading" aria-live="polite">Cargando…</div>
+
+  <!-- ── Login ── -->
+  <div id="view-login" class="hidden">
+    <div class="login-card">
+      <div class="login-brand">
+        <h1>WJ-INFORMATICA</h1>
+        <p>Panel de administración</p>
+      </div>
+
+      <form id="login-form" novalidate>
+        <div class="form-group">
+          <label for="username">Usuario</label>
+          <input class="form-control" type="text" id="username" name="username"
+                 autocomplete="username" required spellcheck="false">
+        </div>
+        <div class="form-group">
+          <label for="password">Contraseña</label>
+          <input class="form-control" type="password" id="password" name="password"
+                 autocomplete="current-password" required>
+        </div>
+        <button class="btn btn-primary" type="submit">Iniciar sesión</button>
+      </form>
+
+      <div id="login-alert" class="alert alert-error hidden" role="alert" aria-live="assertive"></div>
+    </div>
+  </div>
+
+  <!-- ── Dashboard ── -->
+  <div id="view-dashboard" class="hidden">
+
+    <header class="topbar">
+      <span class="topbar-brand">WJ-INFORMATICA <span>/ Admin</span></span>
+      <button class="btn btn-ghost btn-sm" id="btn-logout" type="button">Cerrar sesión</button>
+    </header>
+
+    <div class="stats-bar" aria-label="Estadísticas de consultas">
+      <div class="stat">Total: <strong id="stat-total">—</strong></div>
+      <div class="stat">Pendientes: <strong id="stat-pendiente">—</strong></div>
+      <div class="stat">Atendidas: <strong id="stat-atendida">—</strong></div>
+    </div>
+
+    <main class="main-content">
+      <div class="table-wrap">
+        <table aria-label="Listado de consultas">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Remitente</th>
+              <th scope="col">Mensaje</th>
+              <th scope="col">Estado</th>
+              <th scope="col">Fecha</th>
+              <th scope="col"><span class="sr-only">Acciones</span></th>
+            </tr>
+          </thead>
+          <tbody id="contacts-tbody">
+            <tr><td colspan="6" class="empty-state">Cargando…</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </main>
+
+  </div>
+
+  <!-- ── Detalle ── -->
+  <div id="view-detail" class="hidden">
+    <div class="detail-back">
+      <button class="btn btn-ghost btn-sm" id="btn-back" type="button">← Volver</button>
+    </div>
+
+    <div class="detail-card">
+      <div class="detail-header">
+        <div>
+          <h2 id="detail-id">Consulta</h2>
+          <div class="detail-meta" id="detail-fecha"></div>
+        </div>
+      </div>
+
+      <dl class="detail-fields">
+        <div class="detail-field">
+          <dt>Nombre</dt>
+          <dd id="detail-nombre"></dd>
+        </div>
+        <div class="detail-field">
+          <dt>Correo electrónico</dt>
+          <dd id="detail-email"></dd>
+        </div>
+        <div class="detail-field">
+          <dt>Teléfono</dt>
+          <dd id="detail-tel"></dd>
+        </div>
+        <div class="detail-field">
+          <dt>Mensaje</dt>
+          <dd id="detail-mensaje"></dd>
+        </div>
+      </dl>
+
+      <div class="detail-actions">
+        <label for="detail-estado" style="font-size:.8125rem;color:var(--text-2);white-space:nowrap">Estado:</label>
+        <select class="estado-select" id="detail-estado" aria-label="Cambiar estado de la consulta">
+          <option value="pendiente">Pendiente</option>
+          <option value="leida">Leída</option>
+          <option value="atendida">Atendida</option>
+        </select>
+        <button class="btn btn-danger btn-sm" id="btn-delete-detail" type="button">Eliminar consulta</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/admin.js" type="module"></script>
+</body>
+</html>

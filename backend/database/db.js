@@ -46,6 +46,15 @@ export function initDb(overridePath) {
     db.exec('ALTER TABLE contacts ADD COLUMN updated_at TEXT');
   }
 
+  db.exec(`
+    CREATE TABLE IF NOT EXISTS sessions (
+      token      TEXT PRIMARY KEY,
+      expires_at TEXT NOT NULL,
+      ip         TEXT,
+      created_at TEXT NOT NULL DEFAULT (datetime('now'))
+    );
+  `);
+
   if (dbPath !== ':memory:') {
     process.stdout.write(JSON.stringify({ ts: new Date().toISOString(), level: 'INFO', msg: 'db_ready', path: dbPath }) + '\n');
   }

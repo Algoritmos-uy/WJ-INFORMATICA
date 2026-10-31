@@ -1,38 +1,9 @@
 import { rateLimit } from '../middleware/rateLimit.js';
 import { validateContact, saveContact } from '../services/contactService.js';
 import { logger } from '../services/logger.js';
+import { json, parseBody, getIp } from '../utils/http.js';
 
 const checkRate = rateLimit({ max: 3, windowMs: 15 * 60 * 1000 });
-
-export function getIp(req) {
-  return (req.headers['x-forwarded-for'] ?? req.socket?.remoteAddress ?? '')
-    .split(',')[0].trim();
-}
-
-function parseBody(req) {
-  return new Promise((resolve, reject) => {
-    let raw = '';
-    req.on('data', chunk => {
-      raw += chunk;
-      if (raw.length > 8192) reject(new Error('Payload demasiado grande'));
-    });
-    req.on('end', () => {
-      try { resolve(JSON.parse(raw)); }
-      catch { reject(new Error('JSON inválido')); }
-    });
-    req.on('error', reject);
-  });
-}
-
-function json(res, status, data) {
-  const body = JSON.stringify(data);
-  res.writeHead(status, {
-    'Content-Type':           'application/json',
-    'Content-Length':         Buffer.byteLength(body),
-    'X-Content-Type-Options': 'nosniff',
-  });
-  res.end(body);
-}
 
 export async function handleContact(req, res) {
   const ip   = getIp(req);
@@ -52,9 +23,7 @@ export async function handleContact(req, res) {
   }
 
   const errors = validateContact(body);
-  if (Object.keys(errors).length) {
-    return json(res, 422, { errors });
-  }
+  if (Object.keys(errors).length) return json(res, 422, { errors });
 
   try {
     const id = saveContact({ ...body, ip });
