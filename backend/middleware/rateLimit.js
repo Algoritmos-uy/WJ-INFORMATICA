@@ -1,9 +1,8 @@
-// Rate limiter en memoria: max N peticiones por ventana de tiempo por IP
 const store = new Map(); // ip → { count, resetAt }
 
 export function rateLimit({ max = 3, windowMs = 15 * 60 * 1000 } = {}) {
   return function check(ip) {
-    const now = Date.now();
+    const now   = Date.now();
     const entry = store.get(ip);
 
     if (!entry || now > entry.resetAt) {
@@ -19,6 +18,11 @@ export function rateLimit({ max = 3, windowMs = 15 * 60 * 1000 } = {}) {
     entry.count++;
     return { allowed: true };
   };
+}
+
+// Para pruebas: limpia el estado del store
+export function resetRateLimitStore() {
+  store.clear();
 }
 
 // Limpia entradas vencidas cada 10 minutos

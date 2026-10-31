@@ -3,20 +3,24 @@ import { env } from './config/env.js';
 import { initDb } from './database/db.js';
 import { serveStatic } from './middleware/static.js';
 import { handleContact } from './routes/contact.js';
+import { logger } from './services/logger.js';
 
 initDb();
 
 const server = createServer(async (req, res) => {
-  const url = new URL(req.url, `http://localhost:${env.PORT}`);
+  const start = Date.now();
+  const url   = new URL(req.url, `http://localhost:${env.PORT}`);
+
+  res.on('finish', () => {
+    logger.info('request', { method: req.method, url: url.pathname, status: res.statusCode, ms: Date.now() - start });
+  });
 
   try {
-    // API de contacto
     if (req.method === 'POST' && url.pathname === '/api/contact') {
       await handleContact(req, res);
       return;
     }
 
-    // Solo GET y HEAD para archivos estáticos
     if (req.method !== 'GET' && req.method !== 'HEAD') {
       res.writeHead(405, { Allow: 'GET, HEAD, POST' });
       res.end();
@@ -25,7 +29,7 @@ const server = createServer(async (req, res) => {
 
     serveStatic(req, res, url);
   } catch (err) {
-    console.error('[server]', err);
+    logger.error('unhandled', { message: err.message });
     if (!res.headersSent) {
       res.writeHead(500, { 'Content-Type': 'application/json' });
       res.end(JSON.stringify({ error: 'Error interno del servidor.' }));
@@ -34,5 +38,5 @@ const server = createServer(async (req, res) => {
 });
 
 server.listen(env.PORT, () => {
-  console.log(`[WJ-INFORMATICA] http://localhost:${env.PORT}  (${env.NODE_ENV})`);
+  logger.info('server_start', { port: env.PORT, env: env.NODE_ENV });
 });
