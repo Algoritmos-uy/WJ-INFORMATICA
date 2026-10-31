@@ -2,9 +2,16 @@ const form      = document.getElementById('contactForm');
 const statusEl  = document.getElementById('formStatus');
 const submitBtn = document.getElementById('submitBtn');
 
+// Flag para evitar que un reset programático (post-éxito) borre el mensaje de confirmación
+let keepStatus = false;
+
 if (form) {
   form.addEventListener('submit', handleSubmit);
-  form.addEventListener('reset', () => { clearErrors(); clearStatus(); });
+  form.addEventListener('reset', () => {
+    clearErrors();
+    if (keepStatus) { keepStatus = false; return; }
+    clearStatus();
+  });
 }
 
 async function handleSubmit(e) {
@@ -30,8 +37,9 @@ async function handleSubmit(e) {
     const json = await res.json();
 
     if (res.ok) {
-      showStatus('success', json.message ?? '¡Mensaje enviado!');
+      keepStatus = true;
       form.reset();
+      showStatus('success', json.message ?? '¡Mensaje enviado!');
     } else if (res.status === 422 && json.errors) {
       // Errores de validación del servidor
       for (const [field_id, msg] of Object.entries(json.errors)) {
@@ -91,7 +99,9 @@ function validateForm() {
 function setLoading(loading) {
   if (!submitBtn) return;
   submitBtn.disabled = loading;
-  submitBtn.textContent = loading ? 'Enviando…' : 'Enviar mensaje';
+  // Actualiza solo el nodo de texto, preservando el ícono SVG
+  const textNode = [...submitBtn.childNodes].findLast(n => n.nodeType === Node.TEXT_NODE);
+  if (textNode) textNode.textContent = loading ? ' Enviando…' : ' Enviar consulta';
 }
 
 function field(id) { return form.querySelector('#' + id); }
