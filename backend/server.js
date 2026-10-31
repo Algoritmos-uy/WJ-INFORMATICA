@@ -29,6 +29,11 @@ const server = createServer(async (req, res) => {
       if (pathname.startsWith('/admin/api/')) {
         return await handleAdminApi(req, res, url);
       }
+      // Redirect /admin → /admin/ para que las rutas relativas del HTML funcionen
+      if (pathname === '/admin' && (req.method === 'GET' || req.method === 'HEAD')) {
+        res.writeHead(301, { Location: '/admin/' });
+        return res.end();
+      }
       // Archivos estáticos del panel admin (HTML, CSS, JS)
       if (req.method === 'GET' || req.method === 'HEAD') {
         return serveAdmin(req, res, url);
