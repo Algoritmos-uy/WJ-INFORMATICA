@@ -23,6 +23,8 @@ export const env = {
   // Getters: leídos en tiempo de ejecución para permitir overrides en tests
   get ADMIN_USERNAME()      { return process.env.ADMIN_USERNAME      ?? ''; },
   get ADMIN_PASSWORD_HASH() { return process.env.ADMIN_PASSWORD_HASH ?? ''; },
+  get DEEPSEEK_API_KEY()    { return process.env.DEEPSEEK_API_KEY    ?? ''; },
+  get DEEPSEEK_MODEL()      { return process.env.DEEPSEEK_MODEL      ?? 'deepseek-chat'; },
 };
 
 if (!env.SESSION_SECRET && env.NODE_ENV === 'production') {

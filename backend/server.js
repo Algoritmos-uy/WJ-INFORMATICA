@@ -3,6 +3,7 @@ import { env } from './config/env.js';
 import { initDb } from './database/db.js';
 import { serveStatic, serveAdmin } from './middleware/static.js';
 import { handleContact } from './routes/contact.js';
+import { handleChat }    from './routes/chat.js';
 import { handleAdminApi } from './routes/admin.js';
 import { logger } from './services/logger.js';
 
@@ -22,6 +23,11 @@ const server = createServer(async (req, res) => {
     // API de contacto público
     if (req.method === 'POST' && pathname === '/api/contact') {
       return await handleContact(req, res);
+    }
+
+    // API del chatbot Tito
+    if (req.method === 'POST' && pathname === '/api/chat') {
+      return await handleChat(req, res);
     }
 
     // Rutas de administración (API + archivos estáticos del panel)

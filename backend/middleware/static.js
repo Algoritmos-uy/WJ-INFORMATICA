@@ -1,5 +1,5 @@
 import { createReadStream, statSync } from 'node:fs';
-import { resolve, extname } from 'node:path';
+import { resolve, extname, sep } from 'node:path';
 
 const MIME = {
   '.html':  'text/html; charset=utf-8',
@@ -40,7 +40,7 @@ export function serveStatic(req, res, url) {
 
   // Previene path traversal
   const filePath = resolve(PUBLIC, '.' + pathname);
-  if (!filePath.startsWith(PUBLIC + '\\') && filePath !== PUBLIC) {
+  if (!filePath.startsWith(PUBLIC + sep) && filePath !== PUBLIC) {
     res.writeHead(403, SEC_HEADERS);
     res.end();
     return;
@@ -67,7 +67,7 @@ export function serveAdmin(req, res, url) {
   if (!extname(pathname)) pathname += '.html';
 
   const filePath = resolve(ADMIN, '.' + pathname);
-  if (!filePath.startsWith(ADMIN + '\\') && filePath !== ADMIN) {
+  if (!filePath.startsWith(ADMIN + sep) && filePath !== ADMIN) {
     res.writeHead(403, SEC_HEADERS); res.end(); return;
   }
 
