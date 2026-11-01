@@ -152,6 +152,40 @@ const CSS = `
 .tito-send:hover:not(:disabled) { filter: brightness(1.1); }
 .tito-send:disabled { opacity: .45; cursor: default; }
 
+.tito-bubble {
+  position: fixed;
+  bottom: calc(1.5rem + 56px + 16px + 250px + 8px);
+  right: calc(1.5rem + 56px + 14px);
+  background: var(--c-primary, #2563eb);
+  color: #fff;
+  padding: .42rem .9rem;
+  border-radius: 20px;
+  font-size: .72rem;
+  font-weight: 700;
+  white-space: nowrap;
+  letter-spacing: .05em;
+  box-shadow: 0 4px 14px rgba(0,0,0,.22);
+  z-index: 91;
+  animation: titoPopIn .4s cubic-bezier(.34,1.56,.64,1) both;
+  animation-delay: .8s;
+  opacity: 0;
+}
+.tito-bubble::after {
+  content: '';
+  position: absolute;
+  right: -7px;
+  top: 50%;
+  transform: translateY(-50%);
+  border: 6px solid transparent;
+  border-left-color: var(--c-primary, #2563eb);
+  border-right-width: 0;
+}
+.tito-bubble[hidden] { display: none !important; }
+@keyframes titoPopIn {
+  from { opacity: 0; transform: scale(.75) translateX(8px); }
+  to   { opacity: 1; transform: scale(1)   translateX(0);   }
+}
+
 @media (max-width: 480px) {
   .tito-window {
     width: calc(100vw - 1.5rem);
@@ -159,7 +193,8 @@ const CSS = `
     height: 65vh;
     bottom: 72px;
   }
-  .tito-btn { bottom: calc(1.5rem + 56px + 16px + 160px); }
+  .tito-btn    { bottom: calc(1.5rem + 56px + 16px + 160px); }
+  .tito-bubble { bottom: calc(1.5rem + 56px + 16px + 160px + 8px); right: calc(.75rem + 56px + 14px); }
 }
 `;
 
@@ -178,6 +213,22 @@ function init() {
   const style = document.createElement('style');
   style.textContent = CSS;
   document.head.appendChild(style);
+
+  // Burbuja "Pregunta lo que quieras"
+  const bubble = document.createElement('div');
+  bubble.className = 'tito-bubble';
+  bubble.setAttribute('aria-hidden', 'true');
+  bubble.textContent = 'PREGUNTA LO QUE QUIERAS';
+  const bubbleDismissed = (() => { try { return sessionStorage.getItem('tito-bubble-seen'); } catch(_) { return false; } })();
+  if (bubbleDismissed) bubble.setAttribute('hidden', '');
+  document.body.appendChild(bubble);
+  // Auto-ocultar después de 6 s
+  if (!bubbleDismissed) {
+    setTimeout(() => {
+      bubble.setAttribute('hidden', '');
+      try { sessionStorage.setItem('tito-bubble-seen', '1'); } catch(_) {}
+    }, 7000);
+  }
 
   // Botón toggle
   const btn = document.createElement('button');
@@ -239,6 +290,8 @@ function init() {
     btn.classList.add('tito-btn--open');
     btn.setAttribute('aria-expanded', 'true');
     btn.innerHTML = SVG_CLOSE;  // imagen ocultada vía CSS cuando --open
+    bubble.setAttribute('hidden', '');
+    try { sessionStorage.setItem('tito-bubble-seen', '1'); } catch(_) {}
     if (msgs.children.length === 0) {
       addMsg('bot', WELCOME);
       showSugg();
