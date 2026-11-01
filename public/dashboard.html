@@ -1,0 +1,275 @@
+<!doctype html>
+<html lang="es" data-theme="light">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard de Métricas — Nexo Comercial · WJ-INFORMATICA</title>
+  <meta name="description" content="Demo de dashboard de analítica de negocio con Chart.js: KPIs, gráficos interactivos y tabla filtrable. Desarrollado por WJ-INFORMATICA.">
+  <link rel="canonical" href="https://algoritmos.uy/dashboard.html">
+  <meta property="og:title" content="Dashboard de Métricas — Nexo Comercial">
+  <meta property="og:description" content="Demo de analítica de negocio: KPIs, gráficos y tabla de datos filtrables. Desarrollado por WJ-INFORMATICA.">
+  <meta property="og:type" content="website">
+  <link rel="icon" href="assets/icons/Logotipo-WJ-.ico">
+  <link rel="stylesheet" href="css/theme.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/pages/dashboard.css">
+  <script>
+    (function () { try { var s = localStorage.getItem('wj-theme'), d = window.matchMedia('(prefers-color-scheme: dark)').matches; document.documentElement.dataset.theme = s || (d ? 'dark' : 'light'); } catch (e) { } })();
+  </script>
+  <!-- Chart.js 4.4.4 — copia local para garantizar disponibilidad offline -->
+  <script src="js/vendor/chart.umd.min.js" defer></script>
+</head>
+
+<body>
+  <a href="#main" class="skip-link">Saltar al contenido principal</a>
+
+  <!-- HEADER -->
+  <header class="header" role="banner">
+    <div class="container header__inner">
+      <a href="index.html" class="brand" aria-label="WJ-INFORMATICA — Inicio">
+        <svg class="brand__mark" width="36" height="36" viewBox="0 0 36 36" fill="none" aria-hidden="true">
+          <rect width="36" height="36" rx="8" fill="var(--c-primary)" />
+          <text x="18" y="25" font-size="14" font-weight="800" text-anchor="middle" fill="white"
+            font-family="system-ui,sans-serif" letter-spacing="-0.5">WJ</text>
+        </svg>
+        <span class="brand__name">WJ-INFORMATICA</span>
+      </a>
+
+      <nav class="nav" id="mainNav" aria-label="Navegación principal">
+        <ul class="nav__list" role="list">
+          <li><a href="index.html" class="nav__link">Inicio</a></li>
+          <li><a href="soluciones.html" class="nav__link">Soluciones</a></li>
+          <li><a href="portfolio.html" class="nav__link" aria-current="page">Portfolio</a></li>
+          <li><a href="sobre-mi.html" class="nav__link">Sobre mí</a></li>
+          <li><a href="contacto.html" class="nav__link nav__link--cta">Contactar</a></li>
+        </ul>
+      </nav>
+
+      <div class="header__actions">
+        <button class="theme-toggle" type="button" id="themeToggle" aria-label="Cambiar a tema oscuro">
+          <svg class="theme-toggle__sun" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="12" cy="12" r="5" />
+            <line x1="12" y1="1" x2="12" y2="3" />
+            <line x1="12" y1="21" x2="12" y2="23" />
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" />
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" />
+            <line x1="1" y1="12" x2="3" y2="12" />
+            <line x1="21" y1="12" x2="23" y2="12" />
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" />
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
+          </svg>
+          <svg class="theme-toggle__moon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+          </svg>
+        </button>
+        <button class="nav-toggle" type="button" id="navToggle" aria-label="Abrir menú" aria-expanded="false"
+          aria-controls="mainNav">
+          <span class="nav-toggle__bar"></span>
+          <span class="nav-toggle__bar"></span>
+          <span class="nav-toggle__bar"></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main id="main" class="dash-page">
+
+    <!-- HERO -->
+    <section class="dash-hero" aria-label="Encabezado del dashboard">
+      <div class="container">
+        <div class="dash-hero__inner">
+          <div>
+            <span class="dash-hero__badge">Demo interactivo</span>
+            <h1 class="dash-hero__title">Nexo Comercial</h1>
+            <p class="dash-hero__sub">Dashboard de analítica de negocio — 24 meses de datos simulados</p>
+          </div>
+          <div class="dash-hero__meta">
+            <span>Construido con</span>
+            <strong>Chart.js · JS puro · sin frameworks</strong>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FILTROS -->
+    <section class="dash-filters" aria-label="Filtros del dashboard">
+      <div class="container">
+        <form class="dash-filters__inner" id="filtroForm" novalidate>
+
+          <div class="filter-group">
+            <label for="f-desde">Desde</label>
+            <select id="f-desde" name="desde" aria-label="Período inicial">
+              <option value="">Todos</option>
+            </select>
+          </div>
+
+          <div class="filter-group">
+            <label for="f-hasta">Hasta</label>
+            <select id="f-hasta" name="hasta" aria-label="Período final">
+              <option value="">Todos</option>
+            </select>
+          </div>
+
+          <div class="filter-group">
+            <label for="f-cat">Categoría</label>
+            <select id="f-cat" name="categoria" aria-label="Filtrar por categoría">
+              <option value="">Todas</option>
+            </select>
+          </div>
+
+          <div class="filter-group">
+            <label for="f-reg">Región</label>
+            <select id="f-reg" name="region" aria-label="Filtrar por región">
+              <option value="">Todas</option>
+            </select>
+          </div>
+
+          <div class="filter-group">
+            <label for="f-canal">Canal</label>
+            <select id="f-canal" name="canal" aria-label="Filtrar por canal">
+              <option value="">Todos</option>
+            </select>
+          </div>
+
+          <div class="filter-actions">
+            <button type="submit" class="btn btn--primary btn--sm">Aplicar</button>
+            <button type="button" class="btn btn--sm" id="btnReset">Restablecer</button>
+          </div>
+
+        </form>
+      </div>
+    </section>
+
+    <!-- CONTENIDO PRINCIPAL -->
+    <div class="dash-body">
+      <div class="container">
+
+        <!-- KPIs -->
+        <section class="dash-section" aria-labelledby="kpi-section-title">
+          <h2 class="dash-section__title" id="kpi-section-title">
+            Indicadores clave
+            <span id="periodoLabel" aria-live="polite"></span>
+          </h2>
+          <div class="kpi-grid" id="kpiGrid" aria-label="Indicadores clave de negocio">
+            <!-- renderizado por main.js -->
+          </div>
+        </section>
+
+        <!-- GRÁFICOS -->
+        <section class="dash-section" aria-labelledby="charts-section-title">
+          <h2 class="dash-section__title" id="charts-section-title">Análisis visual</h2>
+
+          <div class="charts-grid">
+
+            <!-- Línea: ingresos mensuales por categoría -->
+            <div class="chart-card chart-card--wide">
+              <h3 class="chart-card__title">Ingresos por período y categoría</h3>
+              <div class="chart-card__canvas" style="min-height: 260px;">
+                <canvas id="chartLinea" aria-label="Gráfico de líneas: ingresos por período"></canvas>
+              </div>
+            </div>
+
+            <!-- Barras: operaciones por categoría -->
+            <div class="chart-card">
+              <h3 class="chart-card__title">Operaciones por categoría</h3>
+              <div class="chart-card__canvas">
+                <canvas id="chartBarras" aria-label="Gráfico de barras: operaciones por categoría"></canvas>
+              </div>
+            </div>
+
+            <!-- Donut: distribución por región -->
+            <div class="chart-card">
+              <h3 class="chart-card__title">Distribución de ingresos por región</h3>
+              <div class="chart-card__canvas">
+                <canvas id="chartDonut" aria-label="Gráfico de dona: distribución por región"></canvas>
+              </div>
+            </div>
+
+            <!-- Barras apiladas: ingresos por canal -->
+            <div class="chart-card chart-card--wide">
+              <h3 class="chart-card__title">Ingresos por canal (últimos 12 meses)</h3>
+              <div class="chart-card__canvas" style="min-height: 240px;">
+                <canvas id="chartCanal" aria-label="Gráfico de barras apiladas: ingresos por canal de venta"></canvas>
+              </div>
+            </div>
+
+          </div>
+        </section>
+
+        <!-- TABLA -->
+        <section class="dash-section" aria-labelledby="tabla-section-title">
+          <h2 class="dash-section__title" id="tabla-section-title">Registros detallados</h2>
+          <div class="tabla-section">
+            <div id="tablaContainer">
+              <!-- renderizado por main.js -->
+            </div>
+          </div>
+        </section>
+
+        <!-- DISCLAIMER -->
+        <aside class="dash-disclaimer" aria-label="Nota sobre los datos">
+          <span class="dash-disclaimer__icon" aria-hidden="true">ℹ️</span>
+          <div>
+            <strong>Datos de demostración.</strong>
+            Todos los valores mostrados son generados algorítmicamente con fines ilustrativos.
+            No representan información real de ninguna empresa. Este dashboard fue desarrollado por
+            <strong>WJ-INFORMATICA</strong> como demostración de capacidades técnicas en
+            analítica de negocio y visualización de datos.
+            <a href="contacto.html" style="color: var(--c-primary);">¿Querés algo similar para tu empresa?</a>
+          </div>
+        </aside>
+
+      </div>
+    </div>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer" role="contentinfo">
+    <div class="container footer__inner">
+      <div class="footer__brand">
+        <a href="index.html" class="brand brand--footer" aria-label="WJ-INFORMATICA — Inicio">
+          <svg class="brand__mark" width="28" height="28" viewBox="0 0 36 36" fill="none" aria-hidden="true">
+            <rect width="36" height="36" rx="8" fill="var(--c-primary)" />
+            <text x="18" y="25" font-size="14" font-weight="800" text-anchor="middle" fill="white"
+              font-family="system-ui,sans-serif" letter-spacing="-0.5">WJ</text>
+          </svg>
+          <span class="brand__name">WJ-INFORMATICA</span>
+        </a>
+        <p class="footer__tagline">Soluciones tecnológicas profesionales</p>
+      </div>
+      <nav class="footer__nav" aria-label="Navegación del pie">
+        <ul class="footer__list" role="list">
+          <li><a href="soluciones.html" class="footer__link">Soluciones</a></li>
+          <li><a href="portfolio.html" class="footer__link">Portfolio</a></li>
+          <li><a href="sobre-mi.html" class="footer__link">Sobre mí</a></li>
+          <li><a href="contacto.html" class="footer__link">Contacto</a></li>
+        </ul>
+      </nav>
+      <p class="footer__copy">&copy; 2024 WJ-INFORMATICA. Todos los derechos reservados.</p>
+    </div>
+  </footer>
+
+  <!-- Scripts del sitio -->
+  <script type="module" src="js/nav.js"></script>
+  <!-- Dashboard se carga DESPUÉS de que Chart.js esté disponible (defer en CDN) -->
+  <script type="module">
+    // Esperar a que Chart.js esté listo antes de importar el módulo
+    function loadDashboard() {
+      if (typeof window.Chart !== 'undefined') {
+        import('./js/dashboard/main.js');
+      } else {
+        setTimeout(loadDashboard, 50);
+      }
+    }
+    document.addEventListener('DOMContentLoaded', loadDashboard);
+  </script>
+  <script type="module" src="js/chat.js"></script>
+</body>
+
+</html>
