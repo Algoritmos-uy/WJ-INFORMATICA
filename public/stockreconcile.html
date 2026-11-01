@@ -1,0 +1,326 @@
+<!doctype html>
+<html lang="es" data-theme="light">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>StockReconcile — Reconciliación de inventarios · WJ-INFORMATICA</title>
+  <meta name="description" content="Demo interactiva de reconciliación y comparación de inventarios. Procesa archivos Excel localmente en el navegador. Desarrollado por WJ-INFORMATICA.">
+  <link rel="canonical" href="https://algoritmos.uy/stockreconcile.html">
+  <meta property="og:title" content="StockReconcile — Reconciliación de inventarios">
+  <meta property="og:description" content="Demo interactiva: comparación de inventarios Excel con SheetJS. Procesamiento local, sin servidores. Desarrollado por WJ-INFORMATICA.">
+  <meta property="og:type" content="website">
+  <link rel="icon" href="assets/icons/Logotipo-WJ-.ico">
+  <link rel="stylesheet" href="css/theme.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/pages/stockreconcile.css">
+  <script>
+    (function () {
+      try {
+        var s = localStorage.getItem('wj-theme');
+        var d = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        document.documentElement.dataset.theme = s || (d ? 'dark' : 'light');
+      } catch (e) {}
+    })();
+  </script>
+  <!-- SheetJS 0.18.5 — copia local; los archivos Excel se procesan en el navegador -->
+  <script src="js/vendor/xlsx.full.min.js" defer></script>
+</head>
+
+<body>
+  <a href="#main" class="skip-link">Saltar al contenido principal</a>
+
+  <!-- HEADER -->
+  <header class="header" role="banner">
+    <div class="container header__inner">
+      <a href="index.html" class="brand" aria-label="WJ-INFORMATICA — Inicio">
+        <svg class="brand__mark" width="36" height="36" viewBox="0 0 36 36" fill="none" aria-hidden="true">
+          <rect width="36" height="36" rx="8" fill="var(--c-primary)" />
+          <text x="18" y="25" font-size="14" font-weight="800" text-anchor="middle" fill="white"
+            font-family="system-ui,sans-serif" letter-spacing="-0.5">WJ</text>
+        </svg>
+        <span class="brand__name">WJ-INFORMATICA</span>
+      </a>
+
+      <nav class="nav" id="mainNav" aria-label="Navegación principal">
+        <ul class="nav__list" role="list">
+          <li><a href="index.html" class="nav__link">Inicio</a></li>
+          <li><a href="soluciones.html" class="nav__link">Soluciones</a></li>
+          <li><a href="portfolio.html" class="nav__link" aria-current="page">Portfolio</a></li>
+          <li><a href="sobre-mi.html" class="nav__link">Sobre mí</a></li>
+          <li><a href="contacto.html" class="nav__link nav__link--cta">Contactar</a></li>
+        </ul>
+      </nav>
+
+      <div class="header__actions">
+        <button class="theme-toggle" type="button" id="themeToggle" aria-label="Cambiar a tema oscuro">
+          <svg class="theme-toggle__sun" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="12" cy="12" r="5" />
+            <line x1="12" y1="1" x2="12" y2="3" />
+            <line x1="12" y1="21" x2="12" y2="23" />
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" />
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" />
+            <line x1="1" y1="12" x2="3" y2="12" />
+            <line x1="21" y1="12" x2="23" y2="12" />
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" />
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
+          </svg>
+          <svg class="theme-toggle__moon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+          </svg>
+        </button>
+        <button class="nav-toggle" type="button" id="navToggle" aria-label="Abrir menú" aria-expanded="false"
+          aria-controls="mainNav">
+          <span class="nav-toggle__bar"></span>
+          <span class="nav-toggle__bar"></span>
+          <span class="nav-toggle__bar"></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+
+    <!-- HERO -->
+    <section class="sr-hero" aria-label="Encabezado StockReconcile">
+      <div class="container">
+        <div class="sr-hero__inner">
+          <div class="sr-hero__left">
+            <a href="portfolio.html" class="sr-back" data-i18n="back_portfolio">← Volver al portfolio</a>
+            <div class="sr-hero__badges">
+              <span class="sr-badge sr-badge--demo" data-i18n="demo_badge">Demo interactiva</span>
+              <span class="sr-badge sr-badge--local">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                100% local
+              </span>
+            </div>
+            <h1 class="sr-hero__title" data-i18n="app_title">StockReconcile</h1>
+            <p class="sr-hero__sub" data-i18n="app_sub">Reconciliación y comparación de inventarios</p>
+          </div>
+          <div class="sr-hero__right">
+            <!-- Selector de idioma -->
+            <div class="sr-lang" role="group" aria-label="Seleccionar idioma">
+              <button type="button" class="sr-lang__btn sr-lang__btn--active" data-lang="es" aria-pressed="true">ES</button>
+              <button type="button" class="sr-lang__btn" data-lang="en" aria-pressed="false">EN</button>
+              <button type="button" class="sr-lang__btn" data-lang="pt" aria-pressed="false">PT</button>
+            </div>
+            <p class="sr-hero__tech">SheetJS 0.18.5 · JS Modules · sin framework</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- AVISO DE PRIVACIDAD -->
+    <div class="sr-privacy" role="note" aria-live="polite">
+      <div class="container">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+        <span data-i18n="privacy">Los archivos se procesan localmente en tu navegador. Ningún dato se envía a servidores externos.</span>
+      </div>
+    </div>
+
+    <!-- CUERPO PRINCIPAL -->
+    <div class="sr-body">
+      <div class="container">
+        <div class="sr-layout">
+
+          <!-- ── SIDEBAR ────────────────────────────────────────────────── -->
+          <aside class="sr-sidebar" aria-label="Configuración">
+
+            <!-- Escenarios de demo -->
+            <section class="sr-panel" aria-labelledby="scenarioTitle">
+              <h2 class="sr-panel__title" id="scenarioTitle" data-i18n="scenario_label">Escenario de demostración</h2>
+
+              <div class="sr-field">
+                <label for="srScenarioSelect" class="sr-label" data-i18n="scenario_label">Escenario</label>
+                <select id="srScenarioSelect" class="sr-select" aria-label="Seleccionar escenario de demostración">
+                  <!-- populado por main.js -->
+                </select>
+              </div>
+
+              <p id="srScenarioDesc" class="sr-scenario-desc">
+                Inventario con nuevos productos, ausencias y variaciones de stock.
+              </p>
+
+              <div class="sr-panel__actions">
+                <button type="button" id="srLoadScenarioBtn" class="btn btn--primary btn--sm" data-i18n="btn_load_scenario">
+                  Cargar escenario
+                </button>
+                <button type="button" id="srResetBtn" class="btn btn--sm" data-i18n="btn_reset">
+                  Restablecer demo
+                </button>
+              </div>
+            </section>
+
+            <!-- Carga de archivos Excel -->
+            <section class="sr-panel" aria-labelledby="uploadTitle">
+              <h2 class="sr-panel__title" id="uploadTitle" data-i18n="upload_title">Cargar archivos Excel</h2>
+
+              <!-- Inventario anterior -->
+              <div class="sr-upload-group">
+                <p class="sr-upload-label" data-i18n="upload_prev_lbl">Inventario anterior (.xlsx)</p>
+                <div class="sr-upload-row">
+                  <button type="button" id="srChoosePrev" class="btn btn--outline btn--sm" data-i18n="btn_choose">
+                    Elegir archivo
+                  </button>
+                  <span id="srFileNamePrev" class="sr-file-name" data-i18n="no_file">Ningún archivo seleccionado</span>
+                </div>
+                <!-- Input oculto -->
+                <input type="file" id="srFilePrev" accept=".xlsx" aria-label="Archivo de inventario anterior" hidden>
+                <!-- Selector de hoja (oculto hasta cargar) -->
+                <div class="sr-sheet-row" id="srSheetRowPrev" hidden>
+                  <label for="srSheetPrev" class="sr-label-sm" data-i18n="sheet_label">Hoja:</label>
+                  <select id="srSheetPrev" class="sr-select sr-select--sm" aria-label="Seleccionar hoja del inventario anterior"></select>
+                </div>
+                <!-- Panel de mapeo manual (oculto hasta necesitarse) -->
+                <div id="srMapeoPrev" hidden></div>
+              </div>
+
+              <!-- Inventario actual -->
+              <div class="sr-upload-group">
+                <p class="sr-upload-label" data-i18n="upload_curr_lbl">Inventario actual (.xlsx)</p>
+                <div class="sr-upload-row">
+                  <button type="button" id="srChooseCurr" class="btn btn--outline btn--sm" data-i18n="btn_choose">
+                    Elegir archivo
+                  </button>
+                  <span id="srFileNameCurr" class="sr-file-name" data-i18n="no_file">Ningún archivo seleccionado</span>
+                </div>
+                <!-- Input oculto -->
+                <input type="file" id="srFileCurr" accept=".xlsx" aria-label="Archivo de inventario actual" hidden>
+                <!-- Selector de hoja (oculto hasta cargar) -->
+                <div class="sr-sheet-row" id="srSheetRowCurr" hidden>
+                  <label for="srSheetCurr" class="sr-label-sm" data-i18n="sheet_label">Hoja:</label>
+                  <select id="srSheetCurr" class="sr-select sr-select--sm" aria-label="Seleccionar hoja del inventario actual"></select>
+                </div>
+                <!-- Panel de mapeo manual (oculto hasta necesitarse) -->
+                <div id="srMapeoCurr" hidden></div>
+              </div>
+
+              <!-- Límites y formatos -->
+              <div class="sr-limits" aria-label="Límites de archivo">
+                <p data-i18n="limit_size">Tamaño máximo: 5 MB</p>
+                <p data-i18n="limit_rows">Máximo de filas: 10 000</p>
+                <p data-i18n="format_supported">Formato compatible: .xlsx (Excel 2007 o posterior)</p>
+              </div>
+            </section>
+
+          </aside>
+
+          <!-- ── ÁREA PRINCIPAL ─────────────────────────────────────────── -->
+          <div class="sr-main" role="region" aria-label="Resultados de reconciliación">
+
+            <!-- Barra de modo + acciones -->
+            <div class="sr-toolbar">
+              <p id="srModeLabel" class="sr-mode-label" aria-live="polite" aria-atomic="true">
+                <span class="sr-mode-dot" aria-hidden="true"></span>
+                <span data-i18n="mode_demo">Datos de demostración</span>
+              </p>
+              <div class="sr-toolbar__actions">
+                <button type="button" id="srRunBtn" class="sr-run-btn btn btn--primary">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                  <span data-i18n="btn_run">Ejecutar reconciliación</span>
+                </button>
+                <button type="button" id="srExportBtn" class="sr-export-btn btn btn--outline" disabled
+                  data-i18n-aria="export_tooltip">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                  <span data-i18n="btn_export">Exportar informe (.xlsx)</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Barra de estado -->
+            <div id="srStatusBar" class="sr-status-bar" role="status" aria-live="polite" aria-atomic="true"></div>
+
+            <!-- KPIs -->
+            <section aria-labelledby="srSummaryTitle">
+              <h2 class="sr-section-title" id="srSummaryTitle" data-i18n="summary_title">Resumen de resultados</h2>
+              <div id="srKpiGrid" class="sr-kpi-grid" aria-label="Resumen de la reconciliación">
+                <!-- renderizado por ui.js -->
+              </div>
+            </section>
+
+            <!-- Filtros de tabla -->
+            <div class="sr-filters" aria-label="Filtros de resultados">
+              <div class="sr-filter-group">
+                <label for="srFilterStatus" class="sr-label-sm" data-i18n="col_status">Estado</label>
+                <select id="srFilterStatus" class="sr-select sr-select--sm" aria-label="Filtrar por estado">
+                  <!-- populado por ui.js -->
+                </select>
+              </div>
+              <div class="sr-filter-group sr-filter-group--search">
+                <label for="srSearch" class="sr-label-sm" data-i18n="col_sku">SKU</label>
+                <input type="search" id="srSearch" class="sr-search"
+                  placeholder="Buscar SKU o descripción…"
+                  data-i18n-ph="search_ph"
+                  data-i18n-aria="col_sku"
+                  aria-label="Buscar SKU o descripción">
+              </div>
+            </div>
+
+            <!-- Tabla de resultados -->
+            <section aria-labelledby="srTableTitle">
+              <h2 class="sr-section-title" id="srTableTitle" data-i18n="table_title">Detalle por producto</h2>
+              <div id="srTableWrap" class="sr-table-wrap">
+                <!-- renderizado por ui.js -->
+                <div class="sr-empty" role="status">
+                  <span class="sr-empty__icon" aria-hidden="true">📋</span>
+                  <p class="sr-empty__text" data-i18n="table_no_run">Ejecutá la reconciliación para ver los resultados.</p>
+                </div>
+              </div>
+              <p id="srTableFooter" class="sr-table-footer" aria-live="polite" aria-atomic="true"></p>
+            </section>
+
+          </div><!-- /.sr-main -->
+        </div><!-- /.sr-layout -->
+      </div><!-- /.container -->
+    </div><!-- /.sr-body -->
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer" role="contentinfo">
+    <div class="container footer__inner">
+      <div class="footer__brand">
+        <a href="index.html" class="brand brand--footer" aria-label="WJ-INFORMATICA — Inicio">
+          <svg class="brand__mark" width="28" height="28" viewBox="0 0 36 36" fill="none" aria-hidden="true">
+            <rect width="36" height="36" rx="8" fill="var(--c-primary)" />
+            <text x="18" y="25" font-size="14" font-weight="800" text-anchor="middle" fill="white"
+              font-family="system-ui,sans-serif" letter-spacing="-0.5">WJ</text>
+          </svg>
+          <span class="brand__name">WJ-INFORMATICA</span>
+        </a>
+        <p class="footer__tagline">Soluciones tecnológicas profesionales</p>
+      </div>
+      <nav class="footer__nav" aria-label="Navegación del pie">
+        <ul class="footer__list" role="list">
+          <li><a href="soluciones.html" class="footer__link">Soluciones</a></li>
+          <li><a href="portfolio.html" class="footer__link">Portfolio</a></li>
+          <li><a href="sobre-mi.html" class="footer__link">Sobre mí</a></li>
+          <li><a href="contacto.html" class="footer__link">Contacto</a></li>
+        </ul>
+      </nav>
+      <p class="footer__copy">&copy; 2024 WJ-INFORMATICA. Todos los derechos reservados.</p>
+    </div>
+  </footer>
+
+  <!-- Scripts del sitio -->
+  <script type="module" src="js/theme.js"></script>
+  <script type="module" src="js/nav.js"></script>
+  <!-- StockReconcile: esperar SheetJS (defer) antes de importar módulo -->
+  <script type="module">
+    function loadStockReconcile() {
+      if (typeof window.XLSX !== 'undefined') {
+        import('./js/stockreconcile/main.js');
+      } else {
+        setTimeout(loadStockReconcile, 50);
+      }
+    }
+    document.addEventListener('DOMContentLoaded', loadStockReconcile);
+  </script>
+  <script type="module" src="js/chat.js"></script>
+</body>
+
+</html>
