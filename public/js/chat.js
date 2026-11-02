@@ -310,6 +310,7 @@ function init() {
 
   btn.addEventListener('click', () => isOpen ? close() : open());
   closeBtn.addEventListener('click', close);
+  window.titoOpen = open;
 
   // Cerrar con Escape
   win.addEventListener('keydown', e => { if (e.key === 'Escape') close(); });
