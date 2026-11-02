@@ -60,3 +60,6 @@
 .card__icon--hw-l {
   background: linear-gradient(135deg, #1f2937, #374151);
 }
+.card__icon--hw-svc {
+  background: linear-gradient(135deg, #b45309, #d97706);
+}
